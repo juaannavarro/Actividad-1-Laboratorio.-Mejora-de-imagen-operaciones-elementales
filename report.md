@@ -1,6 +1,6 @@
 # Laboratorio de Mejora de Imagen: Operaciones Elementales
 
-**Autor:** [Nombre del Alumno]  
+**Autor:** Juan Navarro Rodriguez
 **Fecha:** 18 de Diciembre de 2024
 
 ---
@@ -31,8 +31,6 @@ Se implementaron tres estrategias de mejora, aplicadas de manera uniforme a toda
 Se implementaron dos estrategias según la severidad de la falta de luz:
 - **Corrección Gamma ($O = I^{\gamma}$):** Utilizada para imágenes moderadamente oscuras (Imagen 2: $\gamma=0.5$; Imagen 4: $\gamma=0.3$).
 - **Transformación Logarítmica ($O = c \cdot \log(1 + I)$):** Aplicada a las imágenes más críticas (1 y 3). Esta transformación expande agresivamente los valores de intensidad bajos (oscuros) hacia rangos medios, haciendo visibles detalles que permanecían ocultos incluso con corrección Gamma.
-
-#### 3.2.2. Procesamiento de Histograma
 
 #### 3.2.2. Procesamiento de Histograma
 - **Ecualización de Histograma Global (HE):** Se aplicó uniformemente sobre el canal Y (Luminancia).
@@ -102,4 +100,3 @@ Tras el análisis de los resultados obtenidos sobre el conjunto de imágenes "Th
 4.  Loh, Y. P., & Zainuddin, R. (2010). A Review of Image Enhancement Techniques. *Journal of Computer Science*.
 
 ---
-*Fin del Documento*
