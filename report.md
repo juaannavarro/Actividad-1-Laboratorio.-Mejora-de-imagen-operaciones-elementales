@@ -71,7 +71,7 @@ A continuación se presentan los resultados obtenidos tras aplicar las técnicas
 ![Figura 3: Comparación Inicio vs Final - Imagen 3 (Transformación Logarítmica)](fotos_result/3_comparison_final.png)
 
 **Imagen 4:**
-- Mejora moderada con Gamma (0.3).
+- **Recuperación efectiva:** La corrección Gamma (0.3) logró recuperar significativamente la luminosidad y visibilidad de los detalles en la estructura del puente, corrigiendo la subexposición severa original.
 
 ![Figura 4: Comparación Inicio vs Final - Imagen 4 (Corrección Gamma)](fotos_result/4_comparison_final.png)
 
