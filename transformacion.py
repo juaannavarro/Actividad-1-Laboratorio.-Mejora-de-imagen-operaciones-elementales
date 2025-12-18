@@ -152,23 +152,6 @@ def main():
             best_img = adjust_gamma(img, gamma=gamma_val)
             method_name = f"Gamma Correction"
         
-        # We also generate the others for completeness/plots, but we save the MAIN comparison logic
-        # Let's save the 'best' result as the final comparison
-        
-        # If we wanted to combine techniques (e.g. CLAHE on top of Gamma), we could.
-        # But per current logic, we are comparing individual techniques. 
-        # For the report we want "Inicio vs Final". 
-        # "Final" implies the best result we achieved.
-        # For 1 & 3, "Final" is Log Transform.
-        # For 2 & 4, "Final" is Gamma (or maybe CLAHE for 4?). 
-        # Let's stick to the Intensity adjustment as the "Final" for now as it had the most impact on brightness,
-        # UNLESS CLAHE was better.
-        # In the report we said CLAHE was good for 2. 
-        # But let's use the Intensity adjusted one for consistency with "Brillo Extremo" iteration.
-        
-        # Actually, for 2, CLAHE was very good. 
-        # Let's just generate comparisons for ALL methods and then pick in the report.
-        
         # Save Intensity Comparison
         save_clean_comparison(name, img, best_img, f"{output_dir}/{name}_comparison_final.png")
         
@@ -189,10 +172,7 @@ def main():
         cv2.imwrite(f"{output_dir}/{name}_clahe.png", clahe_img)
         plot_comparison(name, img, clahe_img, f"CLAHE (Clip={clip})", 
                        f"{output_dir}/{name}_fig_clahe.png")
-        
-        # If Image 2, maybe CLAHE is the better "Final"? 
-        # To avoid confusion, I will overwrite comparison_final if CLAHE is deemed better.
-        # Report said: "Imagen 2: Gamma (0.5): Suficiente... CLAHE: Ofrece el mejor balance".
+
         # Let's use CLAHE for 2 as "Final".
         if name == '2':
              save_clean_comparison(name, img, clahe_img, f"{output_dir}/{name}_comparison_final.png")
