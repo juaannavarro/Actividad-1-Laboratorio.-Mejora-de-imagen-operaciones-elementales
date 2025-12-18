@@ -56,10 +56,26 @@ A continuación se presentan los resultados obtenidos tras aplicar las técnicas
 
 **Imagen 1 (Critica):**
 - **Transformación Logarítmica:** La única técnica que logró revelar con claridad la estructura de la escena. La imagen pasó de ser prácticamente negra a mostrar detalles del entorno urbano. El histograma confirma una expansión masiva de los tonos oscuros hacia el centro del rango dinámico.
+
+![Figura 1: Comparación Inicio vs Final - Imagen 1 (Transformación Logarítmica)](fotos_result/1_comparison_final.png)
+
 - **HE Global / CLAHE:** Mejoraron el contraste local pero partiendo de una señal base muy débil, resultando en imágenes ruidosas si no se aplicaba una pre-corrección de intensidad fuerte.
 
 **Imagen 2:**
 - **Gamma (0.5):** Suficiente para una mejora natural. Log Transform habría sobreexpuesto la imagen.
+- **CLAHE:** Ofreció el mejor balance de texturas.
+
+![Figura 2: Comparación Inicio vs Final - Imagen 2 (CLAHE)](fotos_result/2_comparison_final.png)
+
+**Imagen 3 (Critica):**
+- Similar a la Imagen 1, requirió Log Transform para visibilidad.
+
+![Figura 3: Comparación Inicio vs Final - Imagen 3 (Transformación Logarítmica)](fotos_result/3_comparison_final.png)
+
+**Imagen 4:**
+- Mejora moderada con Gamma (0.3).
+
+![Figura 4: Comparación Inicio vs Final - Imagen 4 (Corrección Gamma)](fotos_result/4_comparison_final.png)
 
 **(Se observa que la elección de la técnica debe basarse en el histograma inicial: histogramas colapsados a la izquierda requieren Log o Gamma muy bajo).**
 

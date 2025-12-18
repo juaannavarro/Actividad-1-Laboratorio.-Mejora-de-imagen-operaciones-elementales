@@ -92,6 +92,18 @@ def plot_comparison(name, original, processed, title, filename):
     plt.savefig(filename)
     plt.close()
 
+def save_clean_comparison(name, original, processed, filename):
+    # Create a simple side-by-side concatenation
+    # Ensure processed size matches original (should be same, but safety first)
+    h, w, c = original.shape
+    processed_resized = cv2.resize(processed, (w, h))
+    
+    # Add a small white separator for aesthetics
+    separator = np.ones((h, 20, 3), dtype=np.uint8) * 255
+    
+    combined = np.hstack((original, separator, processed_resized))
+    cv2.imwrite(filename, combined)
+
 def main():
     output_dir = "fotos_result"
     os.makedirs(output_dir, exist_ok=True)
@@ -127,22 +139,43 @@ def main():
              params['clahe_clip'] = 5.0
              params['unsharp_strength'] = 2.0
 
-        # 1. Intensity Adjustment (Gamma OR Log)
+        # We will select the BEST result for the report comparison
+        # 1. Intensity Adjustment (Gamma OR Log) - This is usually the main enhancement for darkness
         if params['use_log']:
             # Log Transform is better for expanding very low dark values
-            intensity_img = log_transform(img)
+            best_img = log_transform(img)
             method_name = "Log Transform"
         else:
             gamma_val = params['gamma']
-            intensity_img = adjust_gamma(img, gamma=gamma_val)
-            method_name = f"Gamma Correction (g={gamma_val})"
-            
-        cv2.imwrite(f"{output_dir}/{name}_intensity.png", intensity_img)
-        plot_comparison(name, img, intensity_img, method_name, 
+            best_img = adjust_gamma(img, gamma=gamma_val)
+            method_name = f"Gamma Correction"
+        
+        # We also generate the others for completeness/plots, but we save the MAIN comparison logic
+        # Let's save the 'best' result as the final comparison
+        
+        # If we wanted to combine techniques (e.g. CLAHE on top of Gamma), we could.
+        # But per current logic, we are comparing individual techniques. 
+        # For the report we want "Inicio vs Final". 
+        # "Final" implies the best result we achieved.
+        # For 1 & 3, "Final" is Log Transform.
+        # For 2 & 4, "Final" is Gamma (or maybe CLAHE for 4?). 
+        # Let's stick to the Intensity adjustment as the "Final" for now as it had the most impact on brightness,
+        # UNLESS CLAHE was better.
+        # In the report we said CLAHE was good for 2. 
+        # But let's use the Intensity adjusted one for consistency with "Brillo Extremo" iteration.
+        
+        # Actually, for 2, CLAHE was very good. 
+        # Let's just generate comparisons for ALL methods and then pick in the report.
+        
+        # Save Intensity Comparison
+        save_clean_comparison(name, img, best_img, f"{output_dir}/{name}_comparison_final.png")
+        
+        # Generate the standard plots as well (keeping existing logic)
+        cv2.imwrite(f"{output_dir}/{name}_intensity.png", best_img)
+        plot_comparison(name, img, best_img, method_name, 
                        f"{output_dir}/{name}_fig_intensity.png")
 
         # 2. Global Histogram Equalization
-        # Global HE doesn't have parameters, just apply it
         he_img = histogram_equalization(img)
         cv2.imwrite(f"{output_dir}/{name}_he.png", he_img)
         plot_comparison(name, img, he_img, "Global Histogram Equalization", 
@@ -154,6 +187,13 @@ def main():
         cv2.imwrite(f"{output_dir}/{name}_clahe.png", clahe_img)
         plot_comparison(name, img, clahe_img, f"CLAHE (Clip={clip})", 
                        f"{output_dir}/{name}_fig_clahe.png")
+        
+        # If Image 2, maybe CLAHE is the better "Final"? 
+        # To avoid confusion, I will overwrite comparison_final if CLAHE is deemed better.
+        # Report said: "Imagen 2: Gamma (0.5): Suficiente... CLAHE: Ofrece el mejor balance".
+        # Let's use CLAHE for 2 as "Final".
+        if name == '2':
+             save_clean_comparison(name, img, clahe_img, f"{output_dir}/{name}_comparison_final.png")
 
         # 4. Arithmetic Operator: Unsharp Masking (Sharpening)
         sigma = params['unsharp_sigma']
