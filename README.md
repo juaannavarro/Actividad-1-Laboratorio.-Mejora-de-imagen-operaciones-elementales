@@ -48,8 +48,6 @@ Se implementaron dos estrategias según la severidad de la falta de luz:
 
 A continuación se presentan los resultados obtenidos tras aplicar las técnicas descritas. Se han generado comparativas visuales e histogramas para cada caso.
 
-*(Nota: Las figuras mencionadas a continuación se encuentran en la carpeta `fotos_result/` generada por el script `transformacion.py`)*
-
 ### 4.1. Análisis Visual y de Histograma
 
 **Imagen 1 (Critica):**
