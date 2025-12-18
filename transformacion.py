@@ -20,8 +20,10 @@ def load_images():
     return images
 
 def adjust_gamma(image, gamma=1.0):
-    invGamma = 1.0 / gamma
-    table = np.array([((i / 255.0) ** invGamma) * 255
+    # We want gamma < 1.0 to brighten the image.
+    # Standard formula: O = I^(gamma)
+    # If gamma=0.5 -> O = I^0.5 (Sqrt) -> Brightens
+    table = np.array([((i / 255.0) ** gamma) * 255
                       for i in np.arange(0, 256)]).astype("uint8")
     return cv2.LUT(image, table)
 
