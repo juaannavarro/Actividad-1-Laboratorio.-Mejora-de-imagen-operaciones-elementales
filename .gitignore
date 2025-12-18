@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+env/
+
+# Mac
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Actividad especifica (si se desea no subir resultados borrador, pero el usuario quiere entregarlos)
+# resultados/
+# fotos_result/ 
+# Comentado porque el usuario SI quiere subir los resultados.
