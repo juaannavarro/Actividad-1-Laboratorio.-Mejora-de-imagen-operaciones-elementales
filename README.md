@@ -1,0 +1,1 @@
+# Actividad-1-Laboratorio.-Mejora-de-imagen-operaciones-elementales
