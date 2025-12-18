@@ -1,6 +1,6 @@
 # Laboratorio de Mejora de Imagen: Operaciones Elementales
 
-**Autor:** [Nombre del Alumno]  
+**Autor:** Juan Navarro Rodríguez 
 **Fecha:** 18 de Diciembre de 2024
 
 ---
@@ -86,4 +86,3 @@ Tras el análisis de los resultados obtenidos sobre el conjunto de imágenes "Th
 4.  Loh, Y. P., & Zainuddin, R. (2010). A Review of Image Enhancement Techniques. *Journal of Computer Science*.
 
 ---
-*Fin del Documento*
